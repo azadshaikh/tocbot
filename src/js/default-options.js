@@ -90,6 +90,8 @@ export default {
   headingLabelCallback: false,
   // ignore headings that are hidden in DOM
   ignoreHiddenElements: false,
+  // Class to add to divs that should be ignored.
+  ignoreDiv: ".js-toc-ignore-div",
   // Optional callback to modify properties of parsed headings.
   // The heading element is passed in node parameter and information
   // parsed by default parser is provided in obj parameter.

@@ -52,13 +52,23 @@ export default function parseContent(options) {
     // each node is processed twice by this method because nestHeadingsArray() and addNode() calls it
     // first time heading is real DOM node element, second time it is obj
     // that is causing problem so I am processing only original DOM node
-    if (!isHTMLElement(heading)) return heading
+    if (!isHTMLElement(heading)) return heading;
+
+    if (options.ignoreDiv) {
+      let parent = heading.parentNode;
+      while (parent) {
+        if (parent.classList && parent.classList.contains(options.ignoreDiv.slice(1))) {
+          return null;
+        }
+        parent = parent.parentNode;
+      }
+    }
 
     if (
       options.ignoreHiddenElements &&
       (!heading.offsetHeight || !heading.offsetParent)
     ) {
-      return null
+      return null;
     }
 
     const headingLabel =
